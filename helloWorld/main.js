@@ -1,2 +1,2 @@
-var hello = require( './hello' )
+var hello  = require( './hello' );
 hello.world();

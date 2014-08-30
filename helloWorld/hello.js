@@ -1,3 +1,4 @@
+var events = require('events').EventEmitter;
 
 // Define a function to be returned on require
 exports.world = function() {
@@ -8,6 +9,10 @@ exports.world = function() {
   var server = http.createServer( function( request, response ) {
     response.writeHead( 200 );
     response.end( 'hello http' );
+  });
+
+  server.on( 'connection', function( stream ) {
+    console.log( 'connection' );
   });
 
   // Tell the server to respond to port 8080
