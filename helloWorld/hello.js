@@ -1,20 +1,18 @@
-var events = require('events').EventEmitter;
+var events = require( 'events' ).EventEmitter;
+
+var printConnection = function( connection ) {
+  console.log( 'connection' );
+
+  connection.on( 'data', function( data ) {
+    console.log( data );
+  });
+
+  connection.on( 'end', function() {
+    console.log( 'connection ended' );
+  });
+};
 
 // Define a function to be returned on require
-exports.world = function() {
-  // Give us back an HTTP object to work with
-  var http = require('http');
-
-  // Create server to respond with hello
-  var server = http.createServer( function( request, response ) {
-    response.writeHead( 200 );
-    response.end( 'hello http' );
-  });
-
-  server.on( 'connection', function( stream ) {
-    console.log( 'connection' );
-  });
-
-  // Tell the server to respond to port 8080
-  server.listen( 8080 );
+exports.world = function( server ) {
+  server.on( 'connection', printConnection );
 };
